@@ -28,13 +28,10 @@ while game_is_on:
     answer_state = screen.textinput(title="Guess the State", prompt="Give me a state name!: ").title()
 
     if answer_state == "Q" or answer_state == "q":
-        missing_states = []
-        for state in states:
-            if state not in answered_states:
-                missing_states.append(state)
+        missing_states = [state for state in states if state not in answered_states]
         new_data = pandas.DataFrame(missing_states)
         new_data.to_csv("states_to_learn.csv")
-        game_is_on = False
+        break
 
     if answer_state in states:
         if answer_state not in answered_states:
